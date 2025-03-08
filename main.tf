@@ -10,7 +10,7 @@ resource "aws_security_group" "allow_tls" {
         to_port         = ingress.value["to_port"]
         protocol        = ingress.value["protocol"]
         cidr_blocks     = lookup(ingress.value, "cidr_blocks", [])       # ✅ Prevents missing key errors
-        security_groups = lookup(ingress.value, "security_groups", []) 
+        security_groups = tolist(lookup(ingress.value, "security_groups", []))
     }
   }
 
